@@ -18,6 +18,6 @@ def copy_posts():
         db.session.add(new_post)
         db.session.commit()
     
-# copy_posts()
+copy_posts()
 
 # from flaskblog import test
