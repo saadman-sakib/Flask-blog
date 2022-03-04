@@ -7,3 +7,4 @@ flask_admin
 flask_wtf
 itsdangerous==2.0.1
 email_validator
+gunicorn
