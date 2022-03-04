@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Login-Form-Dark.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body style="background: #0d0c0c;min-height: 0px;">
+    <!-- Start: Login Form Dark -->
+    <section class="login-dark" style="height: 461px;">
+        <form class="shake animated" method="post" action="" style="max-width: 552px;margin-left: auto;margin-right: auto;margin-top: 104px;background: #1b1c1e;border: 1px solid rgb(65,65,65) ;">
+            {{ form.hidden_tag() }}
+            <div data-bss-hover-animate="rubberBand"  class="illustration">
+                <a href="#"><i class="icon ion-ios-locked" data-bss-hover-animate="rubberBand" style="color: rgb(135,195,255);"></i></a>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                {% if form.username.errors %}
+                    {{ form.username(class="border-danger form-control", placeholder="Username", style="filter: brightness(158%);color: rgb(154,191,228);" )}}
+                    {% for error in form.username.errors %}
+                        <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                    {% endfor %}
+                {% else %}
+                    {{ form.username(class="form-control", placeholder="Username", style="filter: brightness(158%);color: rgb(154,191,228);" ) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.email.errors %}
+                    {{ form.email(class="border-danger form-control", placeholder="Email", style="filter: brightness(158%);color: rgb(154,191,228);") }}
+                    {% for error in form.email.errors %}
+                        <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                    {% endfor %}
+                {% else %}
+                    {{ form.email(class="form-control", placeholder="Email", style="filter: brightness(158%);color: rgb(154,191,228);" ) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.password.errors %}
+                    {{ form.password(class="border-danger form-control", placeholder="Password", style="filter: brightness(158%);color: rgb(154,191,228);") }}
+                    {% for error in form.password.errors %}
+                        <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                    {% endfor %}
+                {% else %}
+                    {{ form.password(class="form-control", placeholder="Password", style="filter: brightness(158%);color: rgb(154,191,228);" ) }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="border-danger form-control", placeholder="Confirm_password", style="filter: brightness(158%);color: rgb(154,191,228);") }}
+                    {% for error in form.confirm_password.errors %}
+                        <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                    {% endfor %}
+                {% else %}
+                    {{ form.confirm_password(class="form-control", placeholder="Confirm_password", style="filter: brightness(158%);color: rgb(154,191,228);" ) }}
+                {% endif %}    
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary btn-block", style="background: rgb(135,195,255);color: rgb(13,12,12);") }}
+            </div>
+            <a class="forgot" href="{{ url_for('login') }}" style="filter: brightness(158%);">Already Have An Account? Sign In</a>
+        </form>
+        <!-- <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form> -->
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='bs-init.js') }}"></script>
+</body>
+
+</html>

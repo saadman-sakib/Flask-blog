@@ -1,0 +1,20 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+{% if current_user.is_authenticated %}
+    {% if current_user.is_admin %}
+    <div class="">
+        <h1 class="alert"> Admin Panel Funtionalities: </h1>
+        <ul class="list-group">
+            <li class="list-group-item"> <h4>User edit, update, create, delete</h4></li>
+            <li class="list-group-item"> <h4>Post edit, update, create, delete</h4></li>
+            <li class="list-group-item"> <h4>Files edit, update, create, delete</h4></li>
+          </ul>
+    </div>
+    {% else %}
+        <h1 class="alert alert-danger"> Beshi Kabil Hoisos? </h1>
+    {% endif %}
+{% else %}
+    <h1 class="alert alert-danger"> Beshi Kabil Hoisos? </h1>
+{% endif %}
+{% endblock %}

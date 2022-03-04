@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" style="margin-right: 5%;margin-left: 5%;margin-bottom: 5%;">
+    {% for post in posts.items %}
+    <div class="col" style="margin-top: 37px;margin-left: 0px;">
+        <div class="card" data-bss-hover-animate="shake" style="border-style: solid;border-color: rgb(58,60,62);">
+            <div class="card-body" style="background: #1b1c1e;border-style: none;border-color: #ffffff;">
+                <h4 class="card-title" style="font-size: 27px;"> <a style="text-decoration: none; color: #ffffff;" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h4>
+                <h6 class="text-muted card-subtitle mb-2">{{ post.author.username }}</h6>
+                <p class="card-text">{{ post.content }}</p>
+                <small style="font-size: 12px;color: rgb(99,135,170);font-weight: bold;">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                <hr style="border-color: rgb(60,67,74);">
+                <a class="card-link" href="{{ url_for('post', post_id=post.id) }}" style="color: #52c6f8;">Detail</a>
+                <a class="card-link" href="#" style="color: #52c6f8;">Like</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

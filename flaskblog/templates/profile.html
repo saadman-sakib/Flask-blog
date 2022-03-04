@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="login-dark">
+    <form class="shake animated" method="POST" action="" enctype="multipart/form-data" style="max-width: 760px;margin-left: auto;margin-right: auto;margin-top: 62px;margin-bottom: 100px; background: #1b1c1e;border: 1px solid rgb(64,64,64);">
+        <div class="form">
+            {{ form.hidden_tag() }}
+            <div class="col-lg-8 offset-lg-0 text-center" style="min-width: 0px;padding: 20px;max-width: none;">
+                <img src="{{ image_file }}" width="150px" style="margin-left: 0px;border-radius: 50%;">
+                <div style="width: auto;">
+                    {% if form.picture.errors %}
+                    {{ form.picture(class="form-control-file", style="color: rgb(130,176,222);margin-top: 46px;margin-bottom: 0px;" ) }}
+                        {% for error in form.picture.errors %}
+                            <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.picture(class="form-control-file", style="color: rgb(130,176,222);margin-top: 46px;margin-bottom: 0px;" ) }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col" style="max-width: auto;padding: 20px;">
+                <div class="form-group">
+                    {% if form.email.errors %}
+                    {{ form.email(class="border-danger form-control", placeholder="Email: {{ current_user.email }}", style="filter: brightness(158%);color: rgb(154,191,228);") }}
+                        {% for error in form.email.errors %}
+                            <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.email(class="form-control", placeholder="Email: {{ current_user.email }}", style="filter: brightness(158%);color: rgb(154,191,228);" ) }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form.username.errors %}
+                    {{ form.username(class="border-danger form-control", placeholder="Name: {{ current_user.username }}", style="filter: brightness(158%);color: rgb(154,191,228);") }}
+                        {% for error in form.username.errors %}
+                            <small style="color: var(--red);margin-left: 10px;">{{ error }}</small>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.username(class="form-control", placeholder="Name: {{ current_user.username }}", style="filter: brightness(158%);color: rgb(154,191,228);" ) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block", style="background: rgb(135,195,255);color: rgb(13,12,12);") }}
+        </div>
+    </form>
+</section>
+{% endblock content %}

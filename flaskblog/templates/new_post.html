@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="login-dark" style="min-width: 136px;margin-top: 65px;padding: 31px;">
+    <form class="shake animated" method="post" action="" style="max-width: 779px;margin-right: auto;margin-left: auto;background: #1b1c1e;border: 1px solid rgb(61,61,61);">
+        {{ form.hidden_tag() }}
+        <div class="illustration">
+            <p style="color: rgb(255,255,255);font-size: 45px;">New Post</p>
+        </div>
+        <div class="form-group">
+            {% if form.title.errors %}
+                {{ form.title(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.title(class="form-control", style="margin-bottom: 53px;filter: brightness(158%) contrast(100%);", placeholder="Title")}}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {% if form.content.errors %}
+                {{ form.content(class="form-control is-invalid", style="height: 139px;filter: brightness(158%) contrast(100%);") }}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.content(class="form-control", style="height: 139px;filter: brightness(158%) contrast(100%);", placeholder="Write Your Post") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block", style="background: rgb(133,187,254);color: rgb(13,12,12);") }}
+        </div>
+    </form>
+</section>
+{% endblock content %}

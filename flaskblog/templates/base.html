@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Login-Form-Dark.css') }}">
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+</head>
+
+<body style="color: rgb(220,227,234);background: #0d0c0c;">
+    <nav class="navbar navbar-light navbar-expand-md" style="height: 96px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size: 37px;color: rgba(245,251,252,0.9);">Blogs</a>
+            <div class="dropleft">
+                <a aria-expanded="false" data-toggle="dropdown" class="rubberBand animated" href="#" style="color: rgb(247,251,255);border-color: rgb(247,251,255);transform: translateY(0px);"><i class="fa fa-th-large" style="transform: translateX(14px) translateY(7px) scale(2.16);margin-right: 13px;"></i>&nbsp;</a>
+                <div class="dropdown-menu jello animated" style="transform: translate(0px) translateX(0px);background: #363839;">
+                    {% if current_user.is_authenticated %} 
+                        <a class="dropdown-item" href="{{ url_for('account') }}" style="color: rgb(254,254,254);background: #363839;"><i class="fa fa-user" style="transform: scale(1.10);"></i>&nbsp;Profile</a>
+                        <a class="dropdown-item" href="{{ url_for('new_post') }}" style="color: rgb(255,255,255);background: #363839;"><i class="fa fa-pencil-square-o" style="transform: scale(1.10);"></i>&nbsp;New Blog</a>
+                        <a class="dropdown-item" href="{{ url_for('logout') }}" style="color: var(--red);background: #363839;"><i class="fa fa-toggle-left" style="transform: scale(1.1);"></i>&nbsp;Logout</a>
+                        {% if current_user.is_admin %} 
+                        <a class="dropdown-item" href="/admin/" style="color: rgb(254,254,254);background: #363839;"><i class="fa fa-dashboard" style="transform: scale(1.10);"></i>&nbsp;Admin Panel</a>
+                        {% endif %}
+                    {% else %}
+                        <a class="dropdown-item" href="{{ url_for('login') }}" style="color: rgb(254,254,254);background: #363839;">Login</a>
+                        <a class="dropdown-item" href="{{ url_for('register') }}" style="color: rgb(255,255,255);background: #363839;">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="container">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    
+    {% block content %}{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='bs-init.js') }}"></script>
+</body>
+
+</html>
