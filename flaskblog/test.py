@@ -17,7 +17,12 @@ def copy_posts():
         new_post = Post(author=user, title=post[1], date_posted=date, content=post[3])
         db.session.add(new_post)
         db.session.commit()
-    
-copy_posts()
+
+# delete all posts
+def delete_posts():
+    posts = Post.query.all()
+    for post in posts:
+        db.session.delete(post)
+    db.session.commit()
 
 # from flaskblog import test

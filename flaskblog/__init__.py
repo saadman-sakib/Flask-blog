@@ -6,10 +6,11 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_admin import Admin
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 admin = Admin(app, name='Admin Pannel', template_mode='bootstrap3')
@@ -24,4 +25,4 @@ app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 mail = Mail(app)
 
-from flaskblog import routes, admin_view
+from flaskblog import routes, admin_view, test

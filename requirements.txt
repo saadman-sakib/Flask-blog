@@ -9,3 +9,5 @@ itsdangerous==2.0.1
 email_validator
 gunicorn
 Pillow
+python-dateutil
+psycopg2-binary
