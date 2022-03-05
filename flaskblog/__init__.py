@@ -10,7 +10,7 @@ from flask_admin import Admin
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MY_DATABASE_URL')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 admin = Admin(app, name='Admin Pannel', template_mode='bootstrap3')
